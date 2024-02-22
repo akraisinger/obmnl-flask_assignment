@@ -16,11 +16,11 @@ def get_transactions():
 @app.route("/add", methods=['GET','POST'])
 def add_transaction():
     if request.method == 'POST':
-        transation = {
+        transaction = {
               'id': len(transactions)+1,
               'date': request.form['date'],
               'amount': float(request.form['amount'])
-             }
+            }
         transactions.append(transaction)
         return redirect(url_for('get_transactions'))
     return render_template('form.html')
@@ -43,7 +43,7 @@ def edit_transaction(transaction_id):
                 return render_template('edit.html', transaction=transaction)
 
 # Delete operation
-@app.route("/delete/<int:transaction_id>", method=['DELETE'])
+@app.route("/delete/<int:transaction_id>")
 def delete_transaction(transaction_id):
     for transaction in transactions:
         if transaction['id'] == transaction_id:
